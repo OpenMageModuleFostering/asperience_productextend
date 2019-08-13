@@ -175,6 +175,8 @@
                 <active>1</active>
             </general>
             <productextend>
+            	<allow_inactive><![CDATA[1]]></allow_inactive>
+            	<allow_status><![CDATA[1]]></allow_status>
             	<allow_new><![CDATA[1]]></allow_new>
             	<allow_price><![CDATA[1]]></allow_price>
             	<allow_price_special><![CDATA[1]]></allow_price_special>
