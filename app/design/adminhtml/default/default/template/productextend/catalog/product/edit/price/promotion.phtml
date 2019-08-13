@@ -1,0 +1,42 @@
+<?php
+/**
+ * @category   ASPerience
+ * @package    Asperience_Productextend
+ * @author     ASPerience - www.asperience.fr
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    
+    <?php if($_promotions = $this->loadPromotions()): ?>
+    <td colspan="10" class="grid tier">
+	    <table cellspacing="0" style="border:solid 1px #CBD3D4">
+	        <tr class="headings">
+	            <th><?php echo Mage::helper('productextend')->__('User') ?></th>
+	            <th><?php echo Mage::helper('productextend')->__('Price') ?></th>
+				<th><?php echo Mage::helper('productextend')->__('Special price') ?></th>
+				<th><?php echo Mage::helper('productextend')->__('Special Price From Date') ?></th>
+				<th><?php echo Mage::helper('productextend')->__('Special Price To Date') ?></th>
+				<th><?php echo Mage::helper('productextend')->__('Website') ?></th>
+				<th class="last"><?php echo Mage::helper('productextend')->__('Created At') ?></th>
+	        </tr>
+	        <?php foreach($_promotions as $_promoId): 
+	        	$_promo = $this->getPromotion($_promoId) ?>
+	        <tr >
+	            <td><?php echo $_promo->getUser() ?></td>
+	            <td><?php echo Mage::helper('core')->currency($_promo->getPrice()) ?></td>
+	            <td><?php echo Mage::helper('core')->currency($_promo->getSpecialPrice()) ?></td>
+	            <td><?php echo Mage::helper('core')->formatDate($_promo->getSpecialFromDate()) ?></td>
+	            <td><?php echo Mage::helper('core')->formatDate($_promo->getSpecialToDate()) ?></td>
+	            <td><?php echo Mage::app()->getWebsite($_promo->getWebsiteId())->getName() ?></td>
+	            <td><?php echo $_promo->getCreatedTime() ?></td>
+	        </tr>
+	       	<?php endforeach; ?>
+	    </table>
+	</td>
+	<?php else: ?>
+		<td colspan="10" class="grid tier"><?php echo Mage::helper('productextend')->__('This product is not listed in the promotions history.')?></td>
+	<?php endif; ?>
+</tr>

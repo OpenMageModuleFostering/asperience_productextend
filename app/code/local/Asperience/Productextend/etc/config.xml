@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   ASPerience
+ * @package    Asperience_Productextend
+ * @author     ASPerience - www.asperience.fr
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Asperience_Productextend>
+            <version>0.1.1</version>
+        </Asperience_Productextend>
+    </modules>
+	    
+    <admin>
+        <routers>
+			<productextend>
+				<use>admin</use>
+				<args>
+					<module>Asperience_Productextend</module>
+					<frontName>productextend</frontName>
+				</args>
+			</productextend>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+		<menu>
+			<promo module="productextend">
+				<title>Promotions</title>
+				<sort_order>32</sort_order>               
+				<children>
+					<promos module="productextend">
+						<title>Promotions history</title>
+						<sort_order>11</sort_order>
+						<action>productextend/adminhtml_promotion</action>
+					</promos>
+				</children>
+			</promo>
+		</menu>
+		
+		<acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+				<admin>
+                    <children>
+                        <promo translate="title" module="productextend">
+                            <title>Promotions</title>
+                            <children>
+                                <promos translate="title" module="productextend">
+                                	<sort_order>30</sort_order>
+                                    <title>Promotions history</title>
+                                </promos>
+                            </children>
+                        </promo>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+			
+		<layout>
+			<updates>
+				<productextend>
+					<file>productextend.xml</file>
+				</productextend>
+			</updates>
+		</layout>
+		
+		 <translate>
+            <modules>
+                <Asperience_Productextend>
+                    <files>
+                        <default>Asperience_Productextend.csv</default>
+                    </files>
+                </Asperience_Productextend>
+            </modules>
+        </translate>
+    </adminhtml>  
+     
+    <global>
+    	<models>
+            <productextend>
+                <class>Asperience_Productextend_Model</class>
+                <resourceModel>productextend_mysql4</resourceModel>
+            </productextend>
+            <productextend_mysql4>
+                <class>Asperience_Productextend_Model_Mysql4</class>
+                <entities>
+                    <promotion>
+                        <table>history_promotion</table>
+                    </promotion>
+                </entities>
+            </productextend_mysql4>
+        </models>
+        
+        <resources>
+            <productextend_setup>
+                <setup>
+                    <module>Asperience_Productextend</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </productextend_setup>
+            <productextend_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </productextend_write>
+            <productextend_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </productextend_read>
+        </resources>
+        
+        <blocks>
+            <productextend>
+                <class>Asperience_Productextend_Block</class>
+            </productextend>
+            
+            <adminhtml> 
+                 <rewrite> 
+                     <catalog_product_edit_tab_attributes>Asperience_Productextend_Block_Adminhtml_Catalog_Product_Edit_Tab_Attributes</catalog_product_edit_tab_attributes>
+                 </rewrite> 
+             </adminhtml>  
+        </blocks>
+        
+        <helpers>
+            <productextend>
+                <class>Asperience_Productextend_Helper</class>
+            </productextend>
+        </helpers>
+        
+        <events>
+        	<catalog_product_save_before>
+                <observers>
+                    <before_save>
+                        <type>singleton</type>
+                        <class>Asperience_Productextend_Model_Observer</class>
+                        <method>beforeSave</method>
+                    </before_save>
+                </observers>
+            </catalog_product_save_before>
+            <catalog_product_save_after>
+                <observers>
+                    <save_promo_after>
+                        <type>singleton</type>
+                        <class>Asperience_Productextend_Model_Observer</class>
+                        <method>savePromoAfter</method>
+                    </save_promo_after>
+                </observers>
+            </catalog_product_save_after>
+       </events>
+       
+       <template>
+            <email>
+                <catalog_productextend_email_price_template translate="label" module="asperience">
+                    <label>Product Alerts in internal</label>
+                    <file>asperience_product_alert.html</file>
+                    <type>html</type>
+                </catalog_productextend_email_price_template>
+            </email>
+        </template>
+        
+    </global>
+    
+    <default>
+        <catalog>
+         	<general>
+                <active>1</active>
+            </general>
+            <productextend>
+            	<allow_new><![CDATA[1]]></allow_new>
+            	<allow_price><![CDATA[1]]></allow_price>
+            	<allow_price_special><![CDATA[1]]></allow_price_special>
+            	<allow_save><![CDATA[1]]></allow_save>
+                <recipient_email><![CDATA[test@example.com]]></recipient_email>
+                <email_price_template>catalog_productextend_email_price_template</email_price_template>
+                <sender_email_identity>general</sender_email_identity>
+            </productextend>
+        </catalog>
+    </default>
+</config>

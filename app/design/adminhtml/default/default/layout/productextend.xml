@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   ASPerience
+ * @package    Asperience_Productextend
+ * @author     ASPerience - www.asperience.fr
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<layout version="0.1.0">
+    <productextend_adminhtml_promotion_index>
+        <reference name="content">
+            <block type="productextend/adminhtml_promotion" name="promotion" />
+        </reference>
+    </productextend_adminhtml_promotion_index>
+</layout>
