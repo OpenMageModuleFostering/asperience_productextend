@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Asperience_Productextend",
+    "name": "OpenMageModuleFostering\/Asperience_Productextend",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL-3.0)",
     "homepage": "",
     "description": "Module allowing to send product alerts in internal and to historize promotions.",
     "authors": [
-    {
-        "name": "Jean-S\u00e9bastien Hederer",
-        "email": "hedererjs@asperience.fr"
-    }
-],
+        {
+            "name": "Jean-S\u00e9bastien Hederer",
+            "email": "hedererjs@asperience.fr"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
